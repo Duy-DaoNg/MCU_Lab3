@@ -104,8 +104,8 @@ int main(void)
   while (1)
   {
 	  fsm_button();
-	  fsm_full_col();
 	  fsm_full_row();
+	  fsm_full_col();
 
     /* USER CODE END WHILE */
 

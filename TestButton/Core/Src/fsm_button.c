@@ -26,7 +26,7 @@ void fsm_button(){
 		case PRESS_BUTTON:
 			if(timer1Flag == 1){
 				if(isButtonPressed(i) == 0){
-					if(i == 0) toSETTING = SETTING;
+					if(i == 0) {toSETTING = SETTING;}
 					buttonState[i] = NORMAL_BUTTON;
 					setTimer1(BUTTON_DELAY_TIME*4);
 				}

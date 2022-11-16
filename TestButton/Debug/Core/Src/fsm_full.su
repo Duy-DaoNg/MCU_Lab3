@@ -1,4 +1,4 @@
 fsm_full.c:31:6:changeNum	4	static
 fsm_full.c:36:6:fsm_full_task_row	8	static
 fsm_full.c:69:6:fsm_full_row	8	static
-fsm_full.c:265:6:fsm_full_col	4	static
+fsm_full.c:270:6:fsm_full_col	4	static

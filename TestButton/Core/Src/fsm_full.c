@@ -72,6 +72,7 @@ void fsm_full_row(){
 		if(toSETTING == 0){
 			if(timer2Flag == 1){
 				countDownTimeRow--;
+				countDownTimeCol--;
 				/*Time out move to next state*/
 				if(countDownTimeRow <= 0){
 					state_row = AUTO_GREEN;
@@ -94,6 +95,7 @@ void fsm_full_row(){
 		if(toSETTING == 0){
 			if(timer2Flag == 1){
 				countDownTimeRow--;
+				countDownTimeCol--;
 				/*Time out move to next state*/
 				if(countDownTimeRow <= 0){
 					state_row = AUTO_AMBER;
@@ -116,6 +118,7 @@ void fsm_full_row(){
 		if(toSETTING == 0){
 			if(timer2Flag == 1){
 				countDownTimeRow--;
+				countDownTimeCol--;
 				/*Time out move to next state*/
 				if(countDownTimeRow <= 0){
 					state_row = AUTO_RED;
@@ -136,8 +139,8 @@ void fsm_full_row(){
 		break;
 	case BLINK_RED:
 		if(buttonState[0] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
-			setTimer1(BUTTON_DELAY_TIME*20);
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
+			setTimer1(BUTTON_DELAY_TIME*10);
 			buttonState[0] = NORMAL_BUTTON;
 			/*Move to BLINK_AMBER mode*/
 			state_row = BLINK_AMBER;
@@ -149,18 +152,18 @@ void fsm_full_row(){
 			setTimer2(SETTING_TIME);
 		}
 		if(buttonState[1] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			buttonState[1] = NORMAL_BUTTON;
-			setTimer1(BUTTON_DELAY_TIME*20);
+			setTimer1(BUTTON_DELAY_TIME*10);
 			/*Increase value in register*/
 			changeNum();
 			/*Set timer2 to 1000 ~ 10s*/
 			setTimer2(SETTING_TIME);
 		}
 		if(buttonState[2] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			buttonState[2] = NORMAL_BUTTON;
-			setTimer1(BUTTON_DELAY_TIME*20);
+			setTimer1(BUTTON_DELAY_TIME*10);
 			/*Assign value on register to traffic light time to SAVE*/
 			redTime = registerTimeForChange;
 			setTimer2(SETTING_TIME);
@@ -175,8 +178,8 @@ void fsm_full_row(){
 		break;
 	case BLINK_AMBER:
 		if(buttonState[0] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
-			setTimer1(BUTTON_DELAY_TIME*20);
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
+			setTimer1(BUTTON_DELAY_TIME*10);
 			buttonState[0] = NORMAL_BUTTON;
 			/*Move to BLINK_GREEN mode*/
 			state_row = BLINK_GREEN;
@@ -188,18 +191,18 @@ void fsm_full_row(){
 			setTimer2(SETTING_TIME);
 		}
 		if(buttonState[1] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			buttonState[1] = NORMAL_BUTTON;
-			setTimer1(BUTTON_DELAY_TIME*20);
+			setTimer1(BUTTON_DELAY_TIME*10);
 			/*Increase value in register*/
 			changeNum();
 			/*Set timer2 to 1000 ~ 10s*/
 			setTimer2(SETTING_TIME);
 		}
 		if(buttonState[2] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.1s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			buttonState[2] = NORMAL_BUTTON;
-			setTimer1(BUTTON_DELAY_TIME*20);
+			setTimer1(BUTTON_DELAY_TIME*10);
 			/*Assign value on register to traffic light time to SAVE*/
 			amberTime = registerTimeForChange;
 			/*Set timer2 to 1000 ~ 10s*/
@@ -215,7 +218,7 @@ void fsm_full_row(){
 		break;
 	case BLINK_GREEN:
 		if(buttonState[0] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			setTimer1(BUTTON_DELAY_TIME*20);
 			buttonState[0] = NORMAL_BUTTON;
 			state_row = AUTO_RED;
@@ -227,21 +230,23 @@ void fsm_full_row(){
 			countDownTimeCol = greenTime;
 			toSETTING = 0;
 			/*Set timer2 to 100 ~ 1s*/
+			index_led = 0;
+			setTimer3(1);
 			setTimer2(100);
 		}
 		if(buttonState[1] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			buttonState[1] = NORMAL_BUTTON;
-			setTimer1(BUTTON_DELAY_TIME*20);
+			setTimer1(BUTTON_DELAY_TIME*10);
 			/*Increase value in register*/
 			changeNum();
 			/*Set timer2 to 1000 ~ 10s*/
 			setTimer2(SETTING_TIME);
 		}
 		if(buttonState[2] == PRESS_BUTTON){
-			/*set Timer1 100 ~ 1s,button will press every 1s if long-press, and reset button state to NORMAL*/
+			/*set Timer1 50 ~ 0.5s,button will press every 0.5s if long-press, and reset button state to NORMAL*/
 			buttonState[2] = NORMAL_BUTTON;
-			setTimer1(BUTTON_DELAY_TIME*20);
+			setTimer1(BUTTON_DELAY_TIME*10);
 			/*Assign value on register to traffic light time to SAVE*/
 			greenTime = registerTimeForChange;
 			/*Set timer2 to 1000 ~ 10s*/
@@ -265,36 +270,21 @@ void fsm_full_row(){
 void fsm_full_col(){
 	switch(state_col){
 	case AUTO_RED:
-		if(toSETTING == 0){
-			if(timer2Flag == 1){
-				countDownTimeCol--;
-				if(countDownTimeCol <= 0){
-					state_col = AUTO_GREEN;
-					countDownTimeCol = greenTime;
-				}
-			}
+		if(countDownTimeCol <= 0){
+			state_col = AUTO_GREEN;
+			countDownTimeCol = greenTime;
 		}
 		break;
 	case AUTO_GREEN:
-		if(toSETTING == 0){
-			if(timer2Flag == 1){
-				countDownTimeCol--;
-				if(countDownTimeCol <= 0){
-					state_col = AUTO_AMBER;
-					countDownTimeCol = amberTime;
-				}
-			}
+		if(countDownTimeCol <= 0){
+			state_col = AUTO_AMBER;
+			countDownTimeCol = amberTime;
 		}
 		break;
 	case AUTO_AMBER:
-		if(toSETTING == 0){
-			if(timer2Flag == 1){
-				countDownTimeCol--;
-				if(countDownTimeCol <= 0){
-					state_col = AUTO_RED;
-					countDownTimeCol = redTime;
-				}
-			}
+		if(countDownTimeCol <= 0){
+			state_col = AUTO_RED;
+			countDownTimeCol = redTime;
 		}
 		break;
 		/*Below states depend on Row*/
@@ -305,7 +295,6 @@ void fsm_full_col(){
 	case BLINK_GREEN:
 		break;
 	default:
-		state_col = AUTO_GREEN;
 		break;
 	}
 }
